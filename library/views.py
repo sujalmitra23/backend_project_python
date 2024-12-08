@@ -38,7 +38,7 @@ def create_author(request):
 @api_view(['GET'])
 def get_books(request):
     # URL to fetch the book list from
-    url = "http://localhost:8000/api/createbook/"
+    url = "http://localhost:8000/api/getbook/"
 
     # Make a GET request to fetch the books
     try:

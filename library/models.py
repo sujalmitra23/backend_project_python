@@ -1,6 +1,5 @@
-from datetime import datetime
-
-from django.db import models
+from django.db import migrations, models
+import datetime
 from django.utils import timezone
 # Create your models here.
 
@@ -19,18 +18,17 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=100)
     authors = models.ForeignKey(Author, on_delete=models.CASCADE) # 1:M cardinality/relationship, On M Side we write the foreign key
-    published_date = models.DateField(default=timezone.now)
 
 class Students(models.Model):
-    Name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     age = models.IntegerField()
-    dob = models.DateField(default=datetime.today)
+    dob = models.DateField(default=datetime.date, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     std_id = models.IntegerField(primary_key=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=datetime.date, blank=True, null=True)
 
 class course(models.Model):
-    Students=models.ManyToManyField(Students) # M:M cardinality/relationship,
+    students=models.ManyToManyField(Students) # M:M cardinality/relationship,
 
 class Baseclass(models.Model):
     class Meta:
