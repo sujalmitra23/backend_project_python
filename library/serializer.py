@@ -1,38 +1,42 @@
-from cProfile import Profile
+from library.models import user, profile
 
 from rest_framework import serializers
-from rest_framework.authtoken.admin import User
 
-from app1.models import Student, Course
+from library.models import students, course
 from library.models import Book, Author
 
 
-class BookSerializer(serializers.ModelSerializer):
+class userSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Book
-        fields = ['title','authors']
+        model = user
+        fields = ['name', 'email', 'phone']
+
+
+class profileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = profile
+        fields = 'userid'
+
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ['name']
 
-class userSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['name','email','phone']
 
-class profileSerializer(serializers.ModelSerializer):
+class BookSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Profile
-        fields = 'userid'
+        model = Book
+        fields = ['title', 'authors']
+
 
 class studentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Student
+        model = students
         fields = '__all__'
+
 
 class courseSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Course
+        model = course
         fields = 'students'
